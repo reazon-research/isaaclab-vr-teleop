@@ -32,9 +32,12 @@ The system consists of:
 - Starts a TCP server listening on specified IP and port.  
 - Continuously receives JSON data and extracts joint pose and finger distance.  
 - Calculates delta position and rotation relative to the last frame for smooth control.  
-- Maps delta pose and gripper command into robot action tensors used by Isaac Lab environments.
+- Maps delta pose and gripper command(if finger_distance < 0.03: gripper_closed = True, else: gripper_closed = False) into robot action tensors used by Isaac Lab environments.
 
----
+### 3. The main script (`teleop_se3_agent_copy.py`)
+
+- The main script to launch teleoperation with a chosen device(e.g. keyboard, in ouse case: VR via TCP using customized code)
+- The task expect: 6-DoF delta {dx, dy, dz, drx, dry, drz} + gripper velocity The last value is: -1.0 → close the gripper +1.0 → open the gripper
 
 ## Setup
 
